@@ -49,7 +49,6 @@ public class BookStoreHttpApiHostModule : AbpModule
         var configuration = context.Services.GetConfiguration();
         var hostingEnvironment = context.Services.GetHostingEnvironment();
 
-        ConfigureConventionalControllers();
         ConfigureAuthentication(context, configuration);
         ConfigureCache(configuration);
         ConfigureVirtualFileSystem(context);
@@ -86,14 +85,6 @@ public class BookStoreHttpApiHostModule : AbpModule
                         $"..{Path.DirectorySeparatorChar}Acme.BookStore.Application"));
             });
         }
-    }
-
-    private void ConfigureConventionalControllers()
-    {
-        Configure<AbpAspNetCoreMvcOptions>(options =>
-        {
-            options.ConventionalControllers.Create(typeof(BookStoreApplicationModule).Assembly);
-        });
     }
 
     private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
